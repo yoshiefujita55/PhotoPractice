@@ -12,6 +12,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBOutlet weak var myPicker: UIPickerView!
     
+//    segueを設定して画面移動
+    @IBAction func ListLink(_ sender: UIBarButtonItem) {
+         performSegue(withIdentifier: "CategoryLink", sender: nil)
+    }
+    
+    
     override func viewDidLoad() {
         myPicker.delegate = self
         myPicker.dataSource = self
@@ -54,9 +60,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var dvc = segue.destination as! SecondViewController
-        dvc.takeTime = targetMin
+        if segue.identifier == "start"{
+            var dvc = segue.destination as! SecondViewController
+            dvc.takeTime = targetMin
+            }
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

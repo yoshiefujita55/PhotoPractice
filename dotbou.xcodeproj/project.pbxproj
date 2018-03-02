@@ -14,6 +14,11 @@
 		3F046392201AD3DB00337447 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F046390201AD3DB00337447 /* LaunchScreen.storyboard */; };
 		3F04639D201AD3DB00337447 /* dotbouTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F04639C201AD3DB00337447 /* dotbouTests.swift */; };
 		3F0463A8201AD3DB00337447 /* dotbouUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0463A7201AD3DB00337447 /* dotbouUITests.swift */; };
+		3F0AB4832047AEA400D573F2 /* NoImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F0AB4822047AEA400D573F2 /* NoImage.jpg */; };
+		3F38ED0C203FA37D0042DDE3 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED0B203FA37D0042DDE3 /* TableViewController.swift */; };
+		3F38ED0E203FA9F10042DDE3 /* SecondTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED0D203FA9F10042DDE3 /* SecondTableViewController.swift */; };
+		3F38ED10203FB2800042DDE3 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED0F203FB2800042DDE3 /* InputViewController.swift */; };
+		3F38ED12203FB2FE0042DDE3 /* SecondInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED11203FB2FE0042DDE3 /* SecondInputViewController.swift */; };
 		3F70D228202003B000A7A689 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F70D227202003B000A7A689 /* SecondViewController.swift */; };
 		3FD596E32023E62C00CB0E26 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD596D92023E62A00CB0E26 /* 9.jpg */; };
 		3FD596E42023E62C00CB0E26 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD596DA2023E62B00CB0E26 /* 4.jpg */; };
@@ -59,6 +64,11 @@
 		3F0463A3201AD3DB00337447 /* dotbouUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dotbouUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0463A7201AD3DB00337447 /* dotbouUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dotbouUITests.swift; sourceTree = "<group>"; };
 		3F0463A9201AD3DB00337447 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F0AB4822047AEA400D573F2 /* NoImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NoImage.jpg; sourceTree = "<group>"; };
+		3F38ED0B203FA37D0042DDE3 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		3F38ED0D203FA9F10042DDE3 /* SecondTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTableViewController.swift; sourceTree = "<group>"; };
+		3F38ED0F203FB2800042DDE3 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		3F38ED11203FB2FE0042DDE3 /* SecondInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondInputViewController.swift; sourceTree = "<group>"; };
 		3F70D227202003B000A7A689 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3FD596D92023E62A00CB0E26 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.jpg; sourceTree = "<group>"; };
 		3FD596DA2023E62B00CB0E26 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
@@ -121,6 +131,8 @@
 		3F046386201AD3DB00337447 /* dotbou */ = {
 			isa = PBXGroup;
 			children = (
+				3F38ED0F203FB2800042DDE3 /* InputViewController.swift */,
+				3F38ED11203FB2FE0042DDE3 /* SecondInputViewController.swift */,
 				3F046387201AD3DB00337447 /* AppDelegate.swift */,
 				3FD596E22023E62C00CB0E26 /* 0.jpg */,
 				3FD596DB2023E62B00CB0E26 /* 1.jpg */,
@@ -132,8 +144,11 @@
 				3FD596DC2023E62B00CB0E26 /* 7.jpg */,
 				3FD596E12023E62B00CB0E26 /* 8.jpg */,
 				3FD596D92023E62A00CB0E26 /* 9.jpg */,
+				3F0AB4822047AEA400D573F2 /* NoImage.jpg */,
 				3F046389201AD3DB00337447 /* ViewController.swift */,
 				3F04638B201AD3DB00337447 /* Main.storyboard */,
+				3F38ED0B203FA37D0042DDE3 /* TableViewController.swift */,
+				3F38ED0D203FA9F10042DDE3 /* SecondTableViewController.swift */,
 				3FD596ED2023F7E800CB0E26 /* ThirdViewController.swift */,
 				3F70D227202003B000A7A689 /* SecondViewController.swift */,
 				3F04638E201AD3DB00337447 /* Assets.xcassets */,
@@ -274,6 +289,7 @@
 				3FD596E52023E62C00CB0E26 /* 1.jpg in Resources */,
 				3F046392201AD3DB00337447 /* LaunchScreen.storyboard in Resources */,
 				3FD596E92023E62C00CB0E26 /* 6.jpg in Resources */,
+				3F0AB4832047AEA400D573F2 /* NoImage.jpg in Resources */,
 				3F04638F201AD3DB00337447 /* Assets.xcassets in Resources */,
 				3FD596E42023E62C00CB0E26 /* 4.jpg in Resources */,
 				3FD596E62023E62C00CB0E26 /* 7.jpg in Resources */,
@@ -306,8 +322,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F70D228202003B000A7A689 /* SecondViewController.swift in Sources */,
+				3F38ED0E203FA9F10042DDE3 /* SecondTableViewController.swift in Sources */,
 				3F04638A201AD3DB00337447 /* ViewController.swift in Sources */,
+				3F38ED10203FB2800042DDE3 /* InputViewController.swift in Sources */,
 				3FD596EE2023F7E800CB0E26 /* ThirdViewController.swift in Sources */,
+				3F38ED12203FB2FE0042DDE3 /* SecondInputViewController.swift in Sources */,
+				3F38ED0C203FA37D0042DDE3 /* TableViewController.swift in Sources */,
 				3F046388201AD3DB00337447 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
