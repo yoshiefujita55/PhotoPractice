@@ -8,19 +8,85 @@
 
 import UIKit
 import Photos
+import CoreData
 
 class SecondInputViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
 
-//    var QuestionImageInput = ""
+    var QuestionImageInput = ""
     var QuestionInput = ""
     var AnswerInput = ""
+    var CategoryInput = ""
     
     @IBOutlet weak var QuestionImage: UIImageView!
     @IBOutlet weak var Question: UITextField!
     @IBOutlet weak var Answer: UITextField!
-    @IBAction func Enter(_ sender: UIButton) {
-        dismiss(animated: false, completion: nil)
-    }
+    @IBAction func Enter(_ sender: UIButton){
+        
+        QuestionInput = Question.text!
+        AnswerInput = Answer.text!
+        
+        
+//        // テキストフィールド付きアラート表示
+//        let alert = UIAlertController(title: "ToDo", message: "文字を入力してください。", preferredStyle: .alert)
+//        // OKボタンの設定
+//        let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+//            (action:UIAlertAction!) -> Void in
+//            // OKを押した時入力されていたテキストを表示
+//            if let textFields = alert.textFields {
+//                // アラートに含まれるすべてのテキストフィールドを調べる
+//                for textField in textFields {
+                    //        AppDelegateのインスタンスを用意しておく
+                    let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        //        エンティティを操作するためのオブジェクト
+                    let viewContext = appDelegate.persistentContainer.viewContext
+                    //        Dotappエンティティオブジェクトを作成
+                    let Dotapp = NSEntityDescription.entity(forEntityName: "Dotapp", in: viewContext)
+                    //        ToDoエンティティにレコード(行)を挿入するためのオブジェクトを作成
+                    let newRecord = NSManagedObject(entity: Dotapp!, insertInto: viewContext)
+                    //        追加したいデータ(txtTitleに入力された文字)のセット
+//                    if textField.text! == "" || textField.text! == nil{
+//                        print("nilが入っています。")
+//                    }else{
+                        newRecord.setValue(QuestionInput, forKey: "questionText")
+                        newRecord.setValue(AnswerInput, forKey: "questionAnswer")
+                        newRecord.setValue(QuestionImageInput, forKey: "questionImage")
+                        newRecord.setValue(CategoryInput, forKey: "category")
+                        newRecord.setValue(Date(), forKey: "timeNow")
+                        
+                        
+                        //        レコード(行)の即時保存
+                        do{
+                            try viewContext.save()
+                        }catch{
+                        }
+//                        print("右の文字が入る\(textField.text!)")
+//
+//
+//                        self.todoTask.append(textField.text!)
+//
+//                        let formatter = DateFormatter()
+//                        formatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+//                        //Stringにしたい
+//                        let detastring:String = formatter.string(from: Date())
+//
+//                        self.todoDeta.append(detastring)
+//                        self.TableView.reloadData()
+//
+//                    }
+            }
+
+//        alert.addAction(okAction)
+//        // キャンセルボタンの設定
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//        alert.addAction(cancelAction)
+//        // テキストフィールドを追加
+//        alert.addTextField(configurationHandler: {(textField: UITextField!) -> Void in
+//            textField.placeholder = "テキスト"
+//        })
+//        alert.view.setNeedsLayout() // シミュレータの種類によっては、これがないと警告が発生
+//        // アラートを画面に表示
+//        self.present(alert, animated: true, completion: nil)
+    
     @IBAction func QuestionImageInput(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {    //追記
             //写真ライブラリ(カメラロール)表示用のViewControllerを宣言
@@ -93,6 +159,12 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
         Question.text = QuestionInput
         
         Answer.text = AnswerInput
+        
+        var a = 1
+        a = a + a
+        var b = 1
+        var c = a + b
+        c = 0
         
         super.viewDidLoad()
 

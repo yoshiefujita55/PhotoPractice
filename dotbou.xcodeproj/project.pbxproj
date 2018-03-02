@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0225102049117B000CABD6 /* DotDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F02250E2049117B000CABD6 /* DotDB.xcdatamodeld */; };
+		3F02251320491279000CABD6 /* Dotapp+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F02251120491279000CABD6 /* Dotapp+CoreDataClass.swift */; };
+		3F02251420491279000CABD6 /* Dotapp+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F02251220491279000CABD6 /* Dotapp+CoreDataProperties.swift */; };
 		3F046388201AD3DB00337447 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F046387201AD3DB00337447 /* AppDelegate.swift */; };
 		3F04638A201AD3DB00337447 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F046389201AD3DB00337447 /* ViewController.swift */; };
 		3F04638D201AD3DB00337447 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F04638B201AD3DB00337447 /* Main.storyboard */; };
@@ -51,6 +54,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F02250F2049117B000CABD6 /* DotDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DotDB.xcdatamodel; sourceTree = "<group>"; };
+		3F02251120491279000CABD6 /* Dotapp+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dotapp+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3F02251220491279000CABD6 /* Dotapp+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dotapp+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3F046384201AD3DB00337447 /* dotbou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dotbou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F046387201AD3DB00337447 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F046389201AD3DB00337447 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +137,9 @@
 		3F046386201AD3DB00337447 /* dotbou */ = {
 			isa = PBXGroup;
 			children = (
+				3F02251120491279000CABD6 /* Dotapp+CoreDataClass.swift */,
+				3F02251220491279000CABD6 /* Dotapp+CoreDataProperties.swift */,
+				3F02250E2049117B000CABD6 /* DotDB.xcdatamodeld */,
 				3F38ED0F203FB2800042DDE3 /* InputViewController.swift */,
 				3F38ED11203FB2FE0042DDE3 /* SecondInputViewController.swift */,
 				3F046387201AD3DB00337447 /* AppDelegate.swift */,
@@ -322,9 +331,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F70D228202003B000A7A689 /* SecondViewController.swift in Sources */,
+				3F02251420491279000CABD6 /* Dotapp+CoreDataProperties.swift in Sources */,
 				3F38ED0E203FA9F10042DDE3 /* SecondTableViewController.swift in Sources */,
 				3F04638A201AD3DB00337447 /* ViewController.swift in Sources */,
 				3F38ED10203FB2800042DDE3 /* InputViewController.swift in Sources */,
+				3F0225102049117B000CABD6 /* DotDB.xcdatamodeld in Sources */,
+				3F02251320491279000CABD6 /* Dotapp+CoreDataClass.swift in Sources */,
 				3FD596EE2023F7E800CB0E26 /* ThirdViewController.swift in Sources */,
 				3F38ED12203FB2FE0042DDE3 /* SecondInputViewController.swift in Sources */,
 				3F38ED0C203FA37D0042DDE3 /* TableViewController.swift in Sources */,
@@ -620,6 +632,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3F02250E2049117B000CABD6 /* DotDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3F02250F2049117B000CABD6 /* DotDB.xcdatamodel */,
+			);
+			currentVersion = 3F02250F2049117B000CABD6 /* DotDB.xcdatamodel */;
+			path = DotDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3F04637C201AD3DB00337447 /* Project object */;
 }
