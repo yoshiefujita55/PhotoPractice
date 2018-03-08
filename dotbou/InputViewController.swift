@@ -20,12 +20,24 @@ class InputViewController: UIViewController {
     //    遷移先からデータを取得
     var input = ""
     
+    //    segueを使ったデータの移動
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "Question1"{
+                let guest = segue.destination as!SecondTableViewController
+                input = CategoryName.text!
+                guest.input1 = input
+        }
+    }
 
     override func viewDidLoad() {
         
         CategoryName.text = input
         
         super.viewDidLoad()
+        
+        var a = "hyouji"
+        print(input + a)
+
 
         // Do any additional setup after loading the view.
     }

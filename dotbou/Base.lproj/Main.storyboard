@@ -264,6 +264,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="questionView" destination="mqy-0F-FDd" id="BkQ-Qf-17M"/>
                         <segue destination="C4X-t6-lD1" kind="showDetail" identifier="SecondInputStart" animates="NO" id="fWo-p6-pmG"/>
                     </connections>
                 </viewController>

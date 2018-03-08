@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F0225102049117B000CABD6 /* DotDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F02250E2049117B000CABD6 /* DotDB.xcdatamodeld */; };
-		3F02251320491279000CABD6 /* Dotapp+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F02251120491279000CABD6 /* Dotapp+CoreDataClass.swift */; };
-		3F02251420491279000CABD6 /* Dotapp+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F02251220491279000CABD6 /* Dotapp+CoreDataProperties.swift */; };
 		3F046388201AD3DB00337447 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F046387201AD3DB00337447 /* AppDelegate.swift */; };
 		3F04638A201AD3DB00337447 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F046389201AD3DB00337447 /* ViewController.swift */; };
 		3F04638D201AD3DB00337447 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F04638B201AD3DB00337447 /* Main.storyboard */; };
@@ -22,6 +19,9 @@
 		3F38ED0E203FA9F10042DDE3 /* SecondTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED0D203FA9F10042DDE3 /* SecondTableViewController.swift */; };
 		3F38ED10203FB2800042DDE3 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED0F203FB2800042DDE3 /* InputViewController.swift */; };
 		3F38ED12203FB2FE0042DDE3 /* SecondInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED11203FB2FE0042DDE3 /* SecondInputViewController.swift */; };
+		3F5D9C46204E2FD7009905BF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D9C44204E2FD7009905BF /* Model.xcdatamodeld */; };
+		3F5D9C4D2050BEFF009905BF /* Dotbou+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D9C4B2050BEFF009905BF /* Dotbou+CoreDataClass.swift */; };
+		3F5D9C4E2050BEFF009905BF /* Dotbou+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D9C4C2050BEFF009905BF /* Dotbou+CoreDataProperties.swift */; };
 		3F70D228202003B000A7A689 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F70D227202003B000A7A689 /* SecondViewController.swift */; };
 		3FD596E32023E62C00CB0E26 /* 9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD596D92023E62A00CB0E26 /* 9.jpg */; };
 		3FD596E42023E62C00CB0E26 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD596DA2023E62B00CB0E26 /* 4.jpg */; };
@@ -54,9 +54,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F02250F2049117B000CABD6 /* DotDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DotDB.xcdatamodel; sourceTree = "<group>"; };
-		3F02251120491279000CABD6 /* Dotapp+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dotapp+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3F02251220491279000CABD6 /* Dotapp+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dotapp+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3F046384201AD3DB00337447 /* dotbou.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dotbou.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F046387201AD3DB00337447 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F046389201AD3DB00337447 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +72,9 @@
 		3F38ED0D203FA9F10042DDE3 /* SecondTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTableViewController.swift; sourceTree = "<group>"; };
 		3F38ED0F203FB2800042DDE3 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		3F38ED11203FB2FE0042DDE3 /* SecondInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondInputViewController.swift; sourceTree = "<group>"; };
+		3F5D9C45204E2FD7009905BF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		3F5D9C4B2050BEFF009905BF /* Dotbou+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dotbou+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3F5D9C4C2050BEFF009905BF /* Dotbou+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dotbou+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3F70D227202003B000A7A689 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		3FD596D92023E62A00CB0E26 /* 9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 9.jpg; sourceTree = "<group>"; };
 		3FD596DA2023E62B00CB0E26 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
@@ -117,6 +117,9 @@
 		3F04637B201AD3DB00337447 = {
 			isa = PBXGroup;
 			children = (
+				3F5D9C4B2050BEFF009905BF /* Dotbou+CoreDataClass.swift */,
+				3F5D9C4C2050BEFF009905BF /* Dotbou+CoreDataProperties.swift */,
+				3F5D9C44204E2FD7009905BF /* Model.xcdatamodeld */,
 				3F046386201AD3DB00337447 /* dotbou */,
 				3F04639B201AD3DB00337447 /* dotbouTests */,
 				3F0463A6201AD3DB00337447 /* dotbouUITests */,
@@ -137,9 +140,6 @@
 		3F046386201AD3DB00337447 /* dotbou */ = {
 			isa = PBXGroup;
 			children = (
-				3F02251120491279000CABD6 /* Dotapp+CoreDataClass.swift */,
-				3F02251220491279000CABD6 /* Dotapp+CoreDataProperties.swift */,
-				3F02250E2049117B000CABD6 /* DotDB.xcdatamodeld */,
 				3F38ED0F203FB2800042DDE3 /* InputViewController.swift */,
 				3F38ED11203FB2FE0042DDE3 /* SecondInputViewController.swift */,
 				3F046387201AD3DB00337447 /* AppDelegate.swift */,
@@ -330,14 +330,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F5D9C4D2050BEFF009905BF /* Dotbou+CoreDataClass.swift in Sources */,
 				3F70D228202003B000A7A689 /* SecondViewController.swift in Sources */,
-				3F02251420491279000CABD6 /* Dotapp+CoreDataProperties.swift in Sources */,
 				3F38ED0E203FA9F10042DDE3 /* SecondTableViewController.swift in Sources */,
 				3F04638A201AD3DB00337447 /* ViewController.swift in Sources */,
 				3F38ED10203FB2800042DDE3 /* InputViewController.swift in Sources */,
-				3F0225102049117B000CABD6 /* DotDB.xcdatamodeld in Sources */,
-				3F02251320491279000CABD6 /* Dotapp+CoreDataClass.swift in Sources */,
 				3FD596EE2023F7E800CB0E26 /* ThirdViewController.swift in Sources */,
+				3F5D9C4E2050BEFF009905BF /* Dotbou+CoreDataProperties.swift in Sources */,
+				3F5D9C46204E2FD7009905BF /* Model.xcdatamodeld in Sources */,
 				3F38ED12203FB2FE0042DDE3 /* SecondInputViewController.swift in Sources */,
 				3F38ED0C203FA37D0042DDE3 /* TableViewController.swift in Sources */,
 				3F046388201AD3DB00337447 /* AppDelegate.swift in Sources */,
@@ -634,13 +634,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		3F02250E2049117B000CABD6 /* DotDB.xcdatamodeld */ = {
+		3F5D9C44204E2FD7009905BF /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				3F02250F2049117B000CABD6 /* DotDB.xcdatamodel */,
+				3F5D9C45204E2FD7009905BF /* Model.xcdatamodel */,
 			);
-			currentVersion = 3F02250F2049117B000CABD6 /* DotDB.xcdatamodel */;
-			path = DotDB.xcdatamodeld;
+			currentVersion = 3F5D9C45204E2FD7009905BF /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

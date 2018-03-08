@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SecondTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,10 +17,15 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
 //        let nextview = storyboard.instantiateViewController(withIdentifier: "secondNewCategory")
 //        present(nextview, animated: false, completion: nil)
     }
-//  変数名
+    
+    @IBOutlet weak var questionView: UITableView!
+    
+    //  変数名
     var QuestionText = ["１６をひくと、残りは？","①左と右の数を合体すると？","８をひくと、残りは？","４３をひくと、残りは？","②左と右の数を合体すると？","③左と右の数を合体すると？","④左と右の数を合体すると？","２００をひくと？","２４４をひくと？","ぜんぶでいくつ？"]
     
     var Answers = [18,34,66,29,33,82,95,20,78,407]
+    
+    var input1 = ""
     
     
     
@@ -50,12 +56,43 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
                 let guest = segue.destination as!SecondInputViewController
                 guest.QuestionInput = QuestionText[sender! as!Int]
                 guest.AnswerInput = String(Answers[sender! as!Int])
+                guest.input2 = input1
             }else{
                 let guest = segue.destination as!SecondInputViewController
                 guest.QuestionInput = ""
                 guest.AnswerInput = ""
+                guest.input2 = input1
             }
             
+        }
+    }
+    
+    //    データを取ります。
+    func read(){
+        //        カラの配列を用意します。
+        
+        //        AppDelegateを使う準備
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        //        エンティティを操作するためのオブジェクト
+        let viewContext = appDelegate.persistentContainer.viewContext
+        //        どのエンティティからデータを取得してくるか設定
+        let query: NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+        
+        do{
+            query.sortDescriptors = [NSSortDescriptor(key: "timeNow",ascending: false)]
+            //            データを一括取得
+            let fetchResults = try viewContext.fetch(query)
+            //            データの取得
+            for result: AnyObject in fetchResults {
+                let text: String! = result.value(forKey: "questionText") as! String
+                let IMG: String! = result.value(forKey: "questionImage") as! String
+                let answer: String! = result.value(forKey: "questionAnswer") as! String
+                let category:String!  = result.value(forKey: "category") as! String
+            //            データの追加
+            QuestionText.append(text)
+//            Answers.append(Int(answer)!)
+            }
+        }catch{
         }
     }
     
@@ -63,6 +100,14 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        questionView.reloadData()
+        
+        read()
+        
+        
+//        var a = "hyouji"
+//        print(input1 + a)
 
         // Do any additional setup after loading the view.
     }
