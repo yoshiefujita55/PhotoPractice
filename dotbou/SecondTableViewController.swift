@@ -70,7 +70,7 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
     //    データを取ります。
     func read(){
         //        カラの配列を用意します。
-        
+        QuestionText = []
         //        AppDelegateを使う準備
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         //        エンティティを操作するためのオブジェクト
@@ -97,17 +97,14 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        read()
+        
+        self.questionView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        questionView.reloadData()
-        
-        read()
-        
-        
-//        var a = "hyouji"
-//        print(input1 + a)
 
         // Do any additional setup after loading the view.
     }

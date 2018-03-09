@@ -7,29 +7,28 @@
 //
 
 import UIKit
+import CoreData
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBAction func newInput(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "InputStart", sender: nil)
-//        let storyboard:UIStoryboard = self.storyboard!
-//        let nextview = storyboard.instantiateViewController(withIdentifier: "newCategory")
-//        present(nextview, animated: false, completion: nil)
     }
     
+    @IBOutlet weak var CategoryView: UITableView!
     
-    var category = ["dotbou1","dotbou2","dotbou3"]
+    var Category = ["dotbou1","dotbou2","dotbou3"]
     
 //    行数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return category.count
+        return Category.count
     }
     
 //    値を表示
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         print(indexPath.row)
-        cell.textLabel?.text = category[indexPath.row] 
+        cell.textLabel?.text = Category[indexPath.row]
         return cell
     }
 
@@ -43,7 +42,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if segue.identifier == "InputStart"{
             if sender != nil{
                 let guest = segue.destination as!InputViewController
-                guest.input = category[sender! as!Int]
+                guest.input = Category[sender! as!Int]
                 }else{
                     let guest = segue.destination as!InputViewController
                     guest.input = ""
@@ -51,6 +50,42 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
 
+    //    データを取ります。
+    func read(){
+        //        カラの配列を用意します。
+        Category = []
+        //        AppDelegateを使う準備
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        //        エンティティを操作するためのオブジェクト
+        let viewContext = appDelegate.persistentContainer.viewContext
+        //        どのエンティティからデータを取得してくるか設定
+        let query: NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+        
+        do{
+            query.sortDescriptors = [NSSortDescriptor(key: "timeNow",ascending: false)]
+            //            データを一括取得
+            let fetchResults = try viewContext.fetch(query)
+            //            データの取得
+            for result: AnyObject in fetchResults {
+                let text: String! = result.value(forKey: "questionText") as! String
+                let IMG: String! = result.value(forKey: "questionImage") as! String
+                let answer: String! = result.value(forKey: "questionAnswer") as! String
+                let category:String!  = result.value(forKey: "category") as! String
+                //            データの追加
+                Category.append(category)
+                //            Answers.append(Int(answer)!)
+            }
+        }catch{
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        read()
+        
+        self.CategoryView.reloadData()
+    }
+    
+    
     
     override func viewDidLoad() {
         

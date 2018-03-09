@@ -23,6 +23,8 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var Answer: UITextField!
     @IBAction func Enter(_ sender: UIButton){
         
+    if Question.text != ""  && Answer.text != ""{
+        
         QuestionInput = Question.text!
         AnswerInput = Answer.text!
         
@@ -35,25 +37,28 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                     //        ToDoエンティティにレコード(行)を挿入するためのオブジェクトを作成
                     let newRecord = NSManagedObject(entity: Dotbou!, insertInto: viewContext)
         
-        
-
                         newRecord.setValue(QuestionInput, forKey: "questionText")
                         newRecord.setValue(AnswerInput, forKey: "questionAnswer")
                         newRecord.setValue(QuestionImageInput, forKey: "questionImage")
                         newRecord.setValue(input2, forKey: "category")
                         newRecord.setValue(Date(), forKey: "timeNow")
-                        
-                        
+        
                         //        レコード(行)の即時保存
                         do{
                             try viewContext.save()
                         }catch{
                         }
                     dismiss(animated: true, completion: nil)
+        
+                        ///ユーザーデフォルトの削除
+                        let userDefaults = UserDefaults.standard
+                        userDefaults.removeObject(forKey: "selectedPhotoURL")
             }
+    }
     
     @IBAction func QuestionImageInput(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {    //追記
+            
             //写真ライブラリ(カメラロール)表示用のViewControllerを宣言
             let controller = UIImagePickerController()
             
@@ -82,7 +87,7 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                 let manager: PHImageManager = PHImageManager()
                 manager.requestImage(for: asset,targetSize: PHImageManagerMaximumSize,contentMode: .aspectFill,options: options) { (image, info) -> Void in
                     self.QuestionImage.image = image
-//                    self.QuestionImageInput = strURL!
+                    self.QuestionImageInput = strURL!
                 }
             }
         }
@@ -127,8 +132,6 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
         
         super.viewDidLoad()
         
-//        var a = "hyouji"
-//        print(input2 + a)
 
         // Do any additional setup after loading the view.
     }

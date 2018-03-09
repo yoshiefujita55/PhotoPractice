@@ -14,7 +14,14 @@ class InputViewController: UIViewController {
     @IBOutlet weak var CategoryName: UITextField!
     
     @IBAction func NewQuestionInput(_ sender: UIButton) {
-        performSegue(withIdentifier: "Question1", sender: nil)
+        input = CategoryName.text!
+        var input2 = " "
+        
+        if CategoryName.text == "" || input.contains(input2){
+            CategoryName.placeholder = "カテゴリー名を入力"
+        }else{
+            performSegue(withIdentifier: "Question1", sender: nil)
+        }
     }
     
     //    遷移先からデータを取得
@@ -34,9 +41,6 @@ class InputViewController: UIViewController {
         CategoryName.text = input
         
         super.viewDidLoad()
-        
-        var a = "hyouji"
-        print(input + a)
 
 
         // Do any additional setup after loading the view.
