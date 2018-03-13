@@ -76,12 +76,15 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
         //        エンティティを操作するためのオブジェクト
         let viewContext = appDelegate.persistentContainer.viewContext
         //        どのエンティティからデータを取得してくるか設定
-        let query: NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+        let fetchRequest:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+//        let query: NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+        let predicate = NSPredicate(format:"%K = %@","category", input1)
+            fetchRequest.predicate = predicate
         
         do{
-            query.sortDescriptors = [NSSortDescriptor(key: "timeNow",ascending: false)]
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timeNow",ascending: false)]
             //            データを一括取得
-            let fetchResults = try viewContext.fetch(query)
+            let fetchResults = try viewContext.fetch(fetchRequest)
             //            データの取得
             for result: AnyObject in fetchResults {
                 let text: String! = result.value(forKey: "questionText") as! String
@@ -96,6 +99,19 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    
+//    //検索する
+//    let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//    let context:NSManagedObjectContext = appDelegate.managedObjectContext
+//    let fetchRequest:NSFetchRequest<Person> = Person.fetchRequest()
+//    let predicate = NSPredicate(format:"%K = %@","name","餅もちこ")
+//    fetchRequest.predicate = predicate
+//    let fetchData = try! context.fetch(fetchRequest)
+//    if(!fetchData.isEmpty){
+//    for i in 0..<fetchData.count{
+//    print("\(fetchData[i].name!)の国は\(fetchData[i].country!)です")
+//    }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         read()
