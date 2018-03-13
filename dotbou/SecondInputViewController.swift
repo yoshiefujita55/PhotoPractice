@@ -17,6 +17,7 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
     var AnswerInput = ""
     
     var input2 = ""
+    var b : Data
     
     @IBOutlet weak var QuestionImage: UIImageView!
     @IBOutlet weak var Question: UITextField!
@@ -30,21 +31,34 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
         // データを取り出す
         let strURL = myDefault.string(forKey: "selectedPhotoURL")
         
+        // イメージが選択されていない場合の処理　　　//イメージが選択された場合の処理
         if strURL == nil || strURL == ""{
             QuestionImageInput = "NoImage.jpg"
             }else{
                 QuestionImageInput = strURL!
             }
         
-        
+        // 答えが入力されている場合の処理
         if Answer.text != ""{
             AnswerInput = Answer.text!
-            
+        }
+        // 答がカラもしくはスペースの時の処理
+        var kara = Answer.text!
+        var space = " "
+        if Answer.text == "" || kara.contains(space){
+            Answer.placeholder = "答えを入力"
+        }
+        
+            // 問題がカラの時はスペースを入力する処理     //問題が入力されている場合の処理
             if Question.text == ""{
                 QuestionInput = " "
             }else{
-                QuestionInput = Question.text!}
-        
+                QuestionInput = Question.text!
+                
+            }
+            
+            // 答えが入力されていない場合は新規作成をコアデータに保存
+            if Answer.text == ""{
                     //        AppDelegateのインスタンスを用意しておく
                     let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
                     //        エンティティを操作するためのオブジェクト
@@ -59,24 +73,36 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                         newRecord.setValue(QuestionImageInput, forKey: "questionImage")
                         newRecord.setValue(input2, forKey: "category")
                         newRecord.setValue(Date(), forKey: "timeNow")
-        
+            
                         //        レコード(行)の即時保存
                         do{
                             try viewContext.save()
                         }catch{
                         }
-                    dismiss(animated: true, completion: nil)
+                        dismiss(animated: false, completion: nil)
         
                         ///ユーザーデフォルトの削除
                         let userDefaults = UserDefaults.standard
                         userDefaults.removeObject(forKey: "selectedPhotoURL")
-        }else{
-            var kara = Answer.text!
-            var space = " "
-               if Answer.text == "" || kara.contains(space){
-                    Answer.placeholder = "答えを入力"
+            }else{
+                //更新する
+                let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+                let fetchRequest:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+                let predicate = NSPredicate(format:"%K = %@","timeNow", input2)
+                fetchRequest.predicate = predicate
+                let fetchData = try! context.fetch(fetchRequest)
+                if(!fetchData.isEmpty){
+                    for i in 0..<fetchData.count{
+                        fetchData[i].questionText = "Japan"
+                    }
+                    do{
+                        try context.save()
+                    }catch{
+                    }
+                    dismiss(animated: false, completion: nil)
                 }
-        }
+            }
     }
         
     

@@ -27,6 +27,8 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     var input1 = ""
     
+    var a : Data = []
+    
     
     
 //    行数を指定
@@ -57,6 +59,7 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
                 guest.QuestionInput = QuestionText[sender! as!Int]
                 guest.AnswerInput = String(Answers[sender! as!Int])
                 guest.input2 = input1
+                guest.b = a
             }else{
                 let guest = segue.destination as!SecondInputViewController
                 guest.QuestionInput = ""
@@ -91,8 +94,10 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
                 let IMG: String! = result.value(forKey: "questionImage") as! String
                 let answer: String! = result.value(forKey: "questionAnswer") as! String
                 let category:String!  = result.value(forKey: "category") as! String
+                let timeNow:Data!  = result.value(forKey: "timeNow") as! Data
             //            データの追加
             QuestionText.append(text)
+            a = timeNow
 //            Answers.append(Int(answer)!)
             }
         }catch{
