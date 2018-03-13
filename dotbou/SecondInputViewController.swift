@@ -23,10 +23,27 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var Answer: UITextField!
     @IBAction func Enter(_ sender: UIButton){
         
-        if Question.text != ""  && Answer.text != ""{
+        //UserDefaultから取り出す
+        // ユーザーデフォルトを用意する
+        let myDefault = UserDefaults.standard
         
-            QuestionInput = Question.text!
+        // データを取り出す
+        let strURL = myDefault.string(forKey: "selectedPhotoURL")
+        
+        if strURL == nil || strURL == ""{
+            QuestionImageInput = "NoImage.jpg"
+            }else{
+                QuestionImageInput = strURL!
+            }
+        
+        
+        if Answer.text != ""{
             AnswerInput = Answer.text!
+            
+            if Question.text == ""{
+                QuestionInput = " "
+            }else{
+                QuestionInput = Question.text!}
         
                     //        AppDelegateのインスタンスを用意しておく
                     let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -54,14 +71,9 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                         let userDefaults = UserDefaults.standard
                         userDefaults.removeObject(forKey: "selectedPhotoURL")
         }else{
-            var kara = Question.text!
-            var kara1 = Answer.text!
+            var kara = Answer.text!
             var space = " "
-        
-                if Question.text == "" || kara.contains(space){
-                    Question.placeholder = "問題を入力"
-                }
-                if Answer.text == "" || kara1.contains(space){
+               if Answer.text == "" || kara.contains(space){
                     Answer.placeholder = "答えを入力"
                 }
         }

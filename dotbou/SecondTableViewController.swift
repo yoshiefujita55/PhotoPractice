@@ -38,7 +38,7 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         print(indexPath.row)
-        cell.textLabel?.text = QuestionText[indexPath.row]
+        cell.textLabel?.text = String(indexPath.row + 1) + "." + "   " + QuestionText[indexPath.row]
         return cell
     }
     
