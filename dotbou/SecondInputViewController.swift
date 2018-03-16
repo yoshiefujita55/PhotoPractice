@@ -17,7 +17,7 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
     var AnswerInput = ""
     
     var input2 = ""
-    var b : Data
+    var b = ""
     
     @IBOutlet weak var QuestionImage: UIImageView!
     @IBOutlet weak var Question: UITextField!
@@ -54,11 +54,11 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                 QuestionInput = " "
             }else{
                 QuestionInput = Question.text!
-                
             }
-            
-            // 答えが入力されていない場合は新規作成をコアデータに保存
-            if Answer.text == ""{
+        
+         // 新規作成をコアデータに保存
+        if Answer.text != "" && (QuestionInput != "" || QuestionImageInput != "NoImage.jpg"){
+            if Question.text != QuestionInput || Answer.text != AnswerInput{
                     //        AppDelegateのインスタンスを用意しておく
                     let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
                     //        エンティティを操作するためのオブジェクト
@@ -85,24 +85,26 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                         let userDefaults = UserDefaults.standard
                         userDefaults.removeObject(forKey: "selectedPhotoURL")
             }else{
-                //更新する
+              
                 let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
                 let fetchRequest:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
-                let predicate = NSPredicate(format:"%K = %@","timeNow", input2)
+                let predicate = NSPredicate(format:"%K = %@ and %K = %@","category",input2,"questionText",QuestionInput)
                 fetchRequest.predicate = predicate
                 let fetchData = try! context.fetch(fetchRequest)
                 if(!fetchData.isEmpty){
                     for i in 0..<fetchData.count{
-                        fetchData[i].questionText = "Japan"
+                        fetchData[i].questionText = QuestionInput
+                        fetchData[i].questionAnswer = AnswerInput
                     }
                     do{
                         try context.save()
                     }catch{
                     }
-                    dismiss(animated: false, completion: nil)
                 }
+                dismiss(animated: false, completion: nil)
             }
+        }
     }
         
     
