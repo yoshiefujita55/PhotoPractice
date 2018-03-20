@@ -24,6 +24,8 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var Answer: UITextField!
     @IBAction func Enter(_ sender: UIButton){
         
+        if QuestionImageInput == "" && QuestionInput == "" && AnswerInput == ""{
+            
         //UserDefaultから取り出す
         // ユーザーデフォルトを用意する
         let myDefault = UserDefaults.standard
@@ -38,27 +40,35 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                 QuestionImageInput = strURL!
             }
         
+//        //問題を入力する
+//        QuestionInput = Question.text!
+        
         // 答えが入力されている場合の処理
         if Answer.text != ""{
             AnswerInput = Answer.text!
-        }
-        // 答がカラもしくはスペースの時の処理
-        var kara = Answer.text!
-        var space = " "
-        if Answer.text == "" || kara.contains(space){
-            Answer.placeholder = "答えを入力"
-        }
-        
-            // 問題がカラの時はスペースを入力する処理     //問題が入力されている場合の処理
-            if Question.text == ""{
-                QuestionInput = " "
-            }else{
-                QuestionInput = Question.text!
+        }else{
+            // 答がカラもしくはスペースの時の処理
+            var kara = Answer.text!
+            var space = " "
+            if Answer.text == "" || kara.contains(space){
+                Answer.placeholder = "答えを入力"
             }
+        }
         
          // 新規作成をコアデータに保存
-        if Answer.text != "" && (QuestionInput != "" || QuestionImageInput != "NoImage.jpg"){
-            if Question.text != QuestionInput || Answer.text != AnswerInput{
+        
+        print(AnswerInput)
+        print(QuestionInput)
+        print(QuestionImageInput)
+        
+        if (AnswerInput != "" && QuestionInput != "") || (AnswerInput != "" && QuestionImageInput != "NoImage.jpg"){
+//            if Question.text != QuestionInput || Answer.text != AnswerInput{
+            
+                    // 問題がカラの時はスペースを入力する処理     //問題が入力されている場合の処理
+                    if Question.text == ""{
+                        QuestionInput = " "
+                    }
+                
                     //        AppDelegateのインスタンスを用意しておく
                     let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
                     //        エンティティを操作するためのオブジェクト
@@ -79,33 +89,39 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                             try viewContext.save()
                         }catch{
                         }
-                        dismiss(animated: false, completion: nil)
-        
                         ///ユーザーデフォルトの削除
                         let userDefaults = UserDefaults.standard
                         userDefaults.removeObject(forKey: "selectedPhotoURL")
-            }else{
-              
-                let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-                let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-                let fetchRequest:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
-                let predicate = NSPredicate(format:"%K = %@ and %K = %@","category",input2,"questionText",QuestionInput)
-                fetchRequest.predicate = predicate
-                let fetchData = try! context.fetch(fetchRequest)
-                if(!fetchData.isEmpty){
-                    for i in 0..<fetchData.count{
-                        fetchData[i].questionText = QuestionInput
-                        fetchData[i].questionAnswer = AnswerInput
-                    }
-                    do{
-                        try context.save()
-                    }catch{
-                    }
-                }
-                dismiss(animated: false, completion: nil)
+                
+                        dismiss(animated: false, completion: nil)
             }
         }
-    }
+//                else{
+//
+//                let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+//                let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+//                let fetchRequest:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+//                let predicate = NSPredicate(format:"%K = %@ and %K = %@","category",input2,"questionText",QuestionInput)
+//                fetchRequest.predicate = predicate
+//                let fetchData = try! context.fetch(fetchRequest)
+//                if(!fetchData.isEmpty){
+//                    for i in 0..<fetchData.count{
+//                        fetchData[i].questionText = QuestionInput
+//                        fetchData[i].questionAnswer = AnswerInput
+//                    }
+//                    do{
+//                        try context.save()
+//                    }catch{
+//                    }
+//                }
+//                dismiss(animated: false, completion: nil)
+//
+//                ///ユーザーデフォルトの削除
+//                let userDefaults = UserDefaults.standard
+//                userDefaults.removeObject(forKey: "selectedPhotoURL")
+//            }
+//        }
+        }
         
     
     @IBAction func QuestionImageInput(_ sender: UIButton) {
@@ -139,7 +155,6 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                 let manager: PHImageManager = PHImageManager()
                 manager.requestImage(for: asset,targetSize: PHImageManagerMaximumSize,contentMode: .aspectFill,options: options) { (image, info) -> Void in
                     self.QuestionImage.image = image
-                    self.QuestionImageInput = strURL!
                 }
             }
         }
