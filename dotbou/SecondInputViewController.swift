@@ -17,14 +17,14 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
     var AnswerInput = ""
     
     var input2 = ""
-    var b = ""
+    var timeNomber = ""
     
     @IBOutlet weak var QuestionImage: UIImageView!
     @IBOutlet weak var Question: UITextField!
     @IBOutlet weak var Answer: UITextField!
     @IBAction func Enter(_ sender: UIButton){
         
-        //問題を新規作成
+//      問題を新規作成
         if AnswerInput == ""{
             
         //UserDefaultから取り出す
@@ -96,37 +96,89 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                 
                         dismiss(animated: false, completion: nil)
             }
+        }else{
+//          UserDefaultから取り出す
+            // ユーザーデフォルトを用意する
+            let myDefault = UserDefaults.standard
+            
+            // データを取り出す
+            let strURL = myDefault.string(forKey: "selectedPhotoURL")
+            
+            // イメージが選択されていない場合の処理　　　//イメージが選択された場合の処理
+            if strURL == nil || strURL == ""{
+                QuestionImageInput = "NoImage.jpg"
+            }else{
+                QuestionImageInput = strURL!
+            }
+            
+            //問題を入力する
+            QuestionInput = Question.text!
+            
+            // 答えが入力されている場合の処理
+            if Answer.text != ""{
+                AnswerInput = Answer.text!
+            }else{
+                // 答がカラもしくはスペースの時の処理
+                var kara = Answer.text!
+                var space = " "
+                if Answer.text == "" || kara.contains(space){
+                    Answer.placeholder = "答えを入力"
+                }
+            }
+            
+//            //String型をDate型へ
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "yyyy-MM-dd- HH:mm:ss"
+//            //Dateにしたい
+//            let detastring:Date = formatter.date(from: input3)!
+            
+//            //データ型をString型へ
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+//            //Stringにしたい
+//            let detastring:String = formatter.string(from: timeNow as Date)
+            
+            // 更新データをコアデータに保存
+            
+            print(AnswerInput)
+            print(QuestionInput)
+            print(QuestionImageInput)
+           
+//            print(detastring)
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy/MM/dd hh:mm:ss"
+            let searchDate = dateFormatter.date(from: timeNomber)
+            
+            print(timeNomber)
+            print(searchDate)
+            
+                let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+                let fetchRequest:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+                let predicate = NSPredicate(format:"timeNow => %@", searchDate! as Date as CVarArg)
+                fetchRequest.predicate = predicate
+                let fetchData = try! context.fetch(fetchRequest)
+                if(!fetchData.isEmpty){
+                    for i in 0..<fetchData.count{
+                        fetchData[i].questionText = QuestionInput
+                        fetchData[i].questionAnswer = AnswerInput
+                    }
+                    do{
+                        try context.save()
+                    }catch{
+                    }
+                }
+                dismiss(animated: false, completion: nil)
+            
+                ///ユーザーデフォルトの削除
+                let userDefaults = UserDefaults.standard
+                userDefaults.removeObject(forKey: "selectedPhotoURL")
         }
-         QuestionImageInput = ""
-         QuestionInput = ""
-         AnswerInput = ""
-        
-//                else{
-//
-//                let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-//                let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-//                let fetchRequest:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
-//                let predicate = NSPredicate(format:"%K = %@ and %K = %@","category",input2,"questionText",QuestionInput)
-//                fetchRequest.predicate = predicate
-//                let fetchData = try! context.fetch(fetchRequest)
-//                if(!fetchData.isEmpty){
-//                    for i in 0..<fetchData.count{
-//                        fetchData[i].questionText = QuestionInput
-//                        fetchData[i].questionAnswer = AnswerInput
-//                    }
-//                    do{
-//                        try context.save()
-//                    }catch{
-//                    }
-//                }
-//                dismiss(animated: false, completion: nil)
-//
-//                ///ユーザーデフォルトの削除
-//                let userDefaults = UserDefaults.standard
-//                userDefaults.removeObject(forKey: "selectedPhotoURL")
-//            }
-//        }
-        }
+            QuestionImageInput = ""
+            QuestionInput = ""
+            AnswerInput = ""
+    }
         
     
     @IBAction func QuestionImageInput(_ sender: UIButton) {
@@ -165,38 +217,38 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
-    //カメラロールで写真を選んだ後
-    func imagePickerController(_ imagePicker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let assetURL:AnyObject = info[UIImagePickerControllerReferenceURL]! as AnyObject
-        let strURL:String = assetURL.description
-        print(strURL)
-        // ユーザーデフォルトを用意する
-        let myDefault = UserDefaults.standard
-        // データを書き込んで
-        myDefault.set(strURL, forKey: "selectedPhotoURL")
-        // 即反映させる
-        myDefault.synchronize()
-        //閉じる処理
+        //カメラロールで写真を選んだ後
+        func imagePickerController(_ imagePicker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+            let assetURL:AnyObject = info[UIImagePickerControllerReferenceURL]! as AnyObject
+            let strURL:String = assetURL.description
+            print(strURL)
+            // ユーザーデフォルトを用意する
+            let myDefault = UserDefaults.standard
+            // データを書き込んで
+            myDefault.set(strURL, forKey: "selectedPhotoURL")
+            // 即反映させる
+            myDefault.synchronize()
+            //閉じる処理
         
         
-        if strURL != nil{
-            let url = URL(string: strURL as String!)
-            var options:PHImageRequestOptions = PHImageRequestOptions()
-            options.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
-            let fetchResult: PHFetchResult = PHAsset.fetchAssets(withALAssetURLs: [url!], options: nil)
-            let asset: PHAsset = (fetchResult.firstObject! as PHAsset)
-            let manager: PHImageManager = PHImageManager()
-            manager.requestImage(for: asset,targetSize: PHImageManagerMaximumSize,contentMode: .aspectFill,options: options) { (image, info) -> Void in
-                self.QuestionImage.image = image
+            if strURL != nil{
+                let url = URL(string: strURL as String!)
+                var options:PHImageRequestOptions = PHImageRequestOptions()
+                options.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
+                let fetchResult: PHFetchResult = PHAsset.fetchAssets(withALAssetURLs: [url!], options: nil)
+                let asset: PHAsset = (fetchResult.firstObject! as PHAsset)
+                let manager: PHImageManager = PHImageManager()
+                manager.requestImage(for: asset,targetSize: PHImageManagerMaximumSize,contentMode: .aspectFill,options: options) { (image, info) -> Void in
+                    self.QuestionImage.image = image
+                }
             }
+            imagePicker.dismiss(animated: false, completion: nil)
         }
-        imagePicker.dismiss(animated: false, completion: nil)
-    }
     
     
     override func viewDidLoad() {
-        
-//        QuestionImage.text = QuestionImageInput
+//        
+//        QuestionImage.image = QuestionImageInput
         
         Question.text = QuestionInput
         

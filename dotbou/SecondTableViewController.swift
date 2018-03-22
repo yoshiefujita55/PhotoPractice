@@ -27,7 +27,7 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     var input1 = ""
     
-    var a = [""]
+    var a = [String]()
     
     
     
@@ -59,14 +59,14 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
                 guest.QuestionInput = QuestionText[sender! as!Int]
                 guest.AnswerInput = String(Answers[sender! as!Int])
                 guest.input2 = input1
-                guest.b = a[sender! as!Int]
+                guest.timeNomber = a[sender! as!Int]
             }else{
                 let guest = segue.destination as!SecondInputViewController
                 guest.QuestionInput = ""
                 guest.AnswerInput = ""
                 guest.input2 = input1
             }
-            
+            print(a)
         }
     }
     
