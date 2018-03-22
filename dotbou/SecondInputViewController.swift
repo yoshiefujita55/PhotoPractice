@@ -24,7 +24,8 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var Answer: UITextField!
     @IBAction func Enter(_ sender: UIButton){
         
-        if QuestionImageInput == "" && QuestionInput == "" && AnswerInput == ""{
+        //問題を新規作成
+        if AnswerInput == ""{
             
         //UserDefaultから取り出す
         // ユーザーデフォルトを用意する
@@ -40,8 +41,8 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                 QuestionImageInput = strURL!
             }
         
-//        //問題を入力する
-//        QuestionInput = Question.text!
+        //問題を入力する
+        QuestionInput = Question.text!
         
         // 答えが入力されている場合の処理
         if Answer.text != ""{
@@ -96,6 +97,10 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                         dismiss(animated: false, completion: nil)
             }
         }
+         QuestionImageInput = ""
+         QuestionInput = ""
+         AnswerInput = ""
+        
 //                else{
 //
 //                let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
