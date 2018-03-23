@@ -98,7 +98,7 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
                 print (timeNow)
                 //データ型をString型へ
                 let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+                formatter.dateFormat = "yyyy/MM/dd hh:mm:ss"
                 //Stringにしたい
                 let detastring:String = formatter.string(from: timeNow as Date)
                 

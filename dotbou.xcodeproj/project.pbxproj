@@ -19,6 +19,8 @@
 		3F38ED0E203FA9F10042DDE3 /* SecondTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED0D203FA9F10042DDE3 /* SecondTableViewController.swift */; };
 		3F38ED10203FB2800042DDE3 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED0F203FB2800042DDE3 /* InputViewController.swift */; };
 		3F38ED12203FB2FE0042DDE3 /* SecondInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F38ED11203FB2FE0042DDE3 /* SecondInputViewController.swift */; };
+		3F3BA48F206372F3006C9BE1 /* startpage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F3BA48E206372F3006C9BE1 /* startpage.jpg */; };
+		3F4466BD2064837B00361987 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4466BC2064837B00361987 /* StartViewController.swift */; };
 		3F5D9C46204E2FD7009905BF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D9C44204E2FD7009905BF /* Model.xcdatamodeld */; };
 		3F5D9C4D2050BEFF009905BF /* Dotbou+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D9C4B2050BEFF009905BF /* Dotbou+CoreDataClass.swift */; };
 		3F5D9C4E2050BEFF009905BF /* Dotbou+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D9C4C2050BEFF009905BF /* Dotbou+CoreDataProperties.swift */; };
@@ -72,6 +74,8 @@
 		3F38ED0D203FA9F10042DDE3 /* SecondTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTableViewController.swift; sourceTree = "<group>"; };
 		3F38ED0F203FB2800042DDE3 /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
 		3F38ED11203FB2FE0042DDE3 /* SecondInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondInputViewController.swift; sourceTree = "<group>"; };
+		3F3BA48E206372F3006C9BE1 /* startpage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = startpage.jpg; sourceTree = "<group>"; };
+		3F4466BC2064837B00361987 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		3F5D9C45204E2FD7009905BF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		3F5D9C4B2050BEFF009905BF /* Dotbou+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dotbou+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3F5D9C4C2050BEFF009905BF /* Dotbou+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dotbou+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				3F70D227202003B000A7A689 /* SecondViewController.swift */,
 				3F04638E201AD3DB00337447 /* Assets.xcassets */,
 				3F046390201AD3DB00337447 /* LaunchScreen.storyboard */,
+				3F4466BC2064837B00361987 /* StartViewController.swift */,
+				3F3BA48E206372F3006C9BE1 /* startpage.jpg */,
 				3F046393201AD3DB00337447 /* Info.plist */,
 			);
 			path = dotbou;
@@ -294,6 +300,7 @@
 			files = (
 				3FD596EA2023E62C00CB0E26 /* 5.jpg in Resources */,
 				3FD596EC2023E62C00CB0E26 /* 0.jpg in Resources */,
+				3F3BA48F206372F3006C9BE1 /* startpage.jpg in Resources */,
 				3FD596E72023E62C00CB0E26 /* 3.jpg in Resources */,
 				3FD596E52023E62C00CB0E26 /* 1.jpg in Resources */,
 				3F046392201AD3DB00337447 /* LaunchScreen.storyboard in Resources */,
@@ -335,6 +342,7 @@
 				3F38ED0E203FA9F10042DDE3 /* SecondTableViewController.swift in Sources */,
 				3F04638A201AD3DB00337447 /* ViewController.swift in Sources */,
 				3F38ED10203FB2800042DDE3 /* InputViewController.swift in Sources */,
+				3F4466BD2064837B00361987 /* StartViewController.swift in Sources */,
 				3FD596EE2023F7E800CB0E26 /* ThirdViewController.swift in Sources */,
 				3F5D9C4E2050BEFF009905BF /* Dotbou+CoreDataProperties.swift in Sources */,
 				3F5D9C46204E2FD7009905BF /* Model.xcdatamodeld in Sources */,

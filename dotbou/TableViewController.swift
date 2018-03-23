@@ -72,8 +72,11 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let answer: String! = result.value(forKey: "questionAnswer") as! String
                 let category:String!  = result.value(forKey: "category") as! String
                 //            データの追加
-                Category.append(category)
-                //            Answers.append(Int(answer)!)
+                if Category.index(of: category) != nil{
+                    print(Category)
+                }else{
+                    Category.append(category)
+                }
             }
         }catch{
         }

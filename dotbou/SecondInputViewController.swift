@@ -156,11 +156,12 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                 let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
                 let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
                 let fetchRequest:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
-                let predicate = NSPredicate(format:"timeNow => %@", searchDate! as Date as CVarArg)
+                let predicate = NSPredicate(format:"timeNow != %@", searchDate! as CVarArg)
                 fetchRequest.predicate = predicate
                 let fetchData = try! context.fetch(fetchRequest)
-                if(!fetchData.isEmpty){
+//                if(!fetchData.isEmpty){
                     for i in 0..<fetchData.count{
+                        fetchData[i].questionImage = QuestionImageInput
                         fetchData[i].questionText = QuestionInput
                         fetchData[i].questionAnswer = AnswerInput
                     }
@@ -168,7 +169,7 @@ class SecondInputViewController: UIViewController, UIImagePickerControllerDelega
                         try context.save()
                     }catch{
                     }
-                }
+//                }
                 dismiss(animated: false, completion: nil)
             
                 ///ユーザーデフォルトの削除
