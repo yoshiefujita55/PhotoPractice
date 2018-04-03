@@ -21,9 +21,9 @@ class SecondTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var questionView: UITableView!
     
     //  変数名
-    var QuestionText = ["１６をひくと、残りは？","①左と右の数を合体すると？","８をひくと、残りは？","４３をひくと、残りは？","②左と右の数を合体すると？","③左と右の数を合体すると？","④左と右の数を合体すると？","２００をひくと？","２４４をひくと？","ぜんぶでいくつ？"]
+    var QuestionText = [""]
     
-    var Answers = [18,34,66,29,33,82,95,20,78,407]
+    var Answers = [""]
     
     var input1 = ""
     

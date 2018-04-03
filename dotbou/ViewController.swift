@@ -29,14 +29,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     var targetCategory = ""
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        read()
+        categoryPicker.reloadAllComponents()
+
+    }
+    
     //    列数
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-            return 1
+        return 1
     }
     //    行数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1{
-        return Category.count
+            return Category.count
         }else{
             return min.count
         }
@@ -49,6 +56,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             return min[row]
         }
     }
+
     
     //    データを取ります。
     func read(){
@@ -84,31 +92,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        read()
-        reloadInputViews()
-        
-    }
-    
-    
-
-//
-////    列数
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-////    行数
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return min.count
-//    }
-//
-////    表示する文字
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return min[row]
-//    }
-    
 //    PickerViewが選択された時の処理
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 1{
@@ -129,6 +112,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         if segue.identifier == "start"{
             var dvc = segue.destination as! SecondViewController
             dvc.takeTime = targetMin
+            dvc.takeCategory = targetCategory
             }
     }
     
@@ -146,6 +130,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         categoryPicker.dataSource = self
         myPicker.delegate = self
         myPicker.dataSource = self
+        
+        categoryPicker.selectedRow(inComponent: 0)
+        
+        
         
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

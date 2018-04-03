@@ -6,7 +6,7 @@
 //  Copyright © 2018年 藤田佳恵. All rights reserved.
 //
 
-import UIKit
+import UIKit; import CoreData
 
 class SecondViewController: UIViewController {
 
@@ -14,9 +14,11 @@ class SecondViewController: UIViewController {
     var takeTime = "5"  //segueの初期値
     var timer = Timer()
     var startTime : Double = 0.0
-    var QuestionText = ["１６をひくと、残りは？","①左と右の数を合体すると？","８をひくと、残りは？","４３をひくと、残りは？","②左と右の数を合体すると？","③左と右の数を合体すると？","④左と右の数を合体すると？","２００をひくと？","２４４をひくと？","ぜんぶでいくつ？"]
-    var Answers = [18,34,66,29,33,82,95,20,78,407]
+    var QuestionText = [""]
+    var Answers = [""]
     var rr = 0
+    var QuestionIMG = [""]
+    var takeCategory = ""
     
 //    部品変数名
     @IBOutlet weak var labelTimer: UILabel!
@@ -26,18 +28,11 @@ class SecondViewController: UIViewController {
     
 //    答えが入力された時の動作
     @IBAction func JudgedAnswer(_ sender: UITextField) {
-//        var AnswerText = Int(Answer.text!)
-//        var r = Int(arc4random())%Answers.count
-//        QuestionImage.image = UIImage(named:"\(r).jpg")
-//        Question.text = QuestionText[r]
-//
-//        print(AnswerText)
-//        print(Answers[r])
         
         var AnswerText = Int(Answer.text!)
 
         if QuestionText.index(of: QuestionText[rr]) == Answers.index(of: Answers[rr]){
-            if AnswerText == Answers[rr]{
+            if AnswerText == Int(Answers[rr]){
                Question.text = "Crear"
                 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
@@ -73,6 +68,52 @@ class SecondViewController: UIViewController {
             }
         }
     
+    //    データを取ります。
+    func read(){
+        //        カラの配列を用意します。
+        QuestionText = []
+        //        AppDelegateを使う準備
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        //        エンティティを操作するためのオブジェクト
+        let viewContext = appDelegate.persistentContainer.viewContext
+        //        どのエンティティからデータを取得してくるか設定
+        let fetchRequest:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+        //        let query: NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+        let predicate = NSPredicate(format:"%K = %@","category", takeCategory)
+        fetchRequest.predicate = predicate
+        
+        do{
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timeNow",ascending: false)]
+            //            データを一括取得
+            let fetchResults = try viewContext.fetch(fetchRequest)
+            //            データの取得
+            for result: AnyObject in fetchResults {
+                let text: String! = result.value(forKey: "questionText") as! String
+                let IMG: String! = result.value(forKey: "questionImage") as! String
+                let answer: String! = result.value(forKey: "questionAnswer") as! String
+                let category:String!  = result.value(forKey: "category") as! String
+                let timeNow:Date!  = result.value(forKey: "timeNow") as! Date
+                print (timeNow)
+//                //データ型をString型へ
+//                let formatter = DateFormatter()
+//                formatter.dateFormat = "yyyy/MM/dd hh:mm:ss"
+                //Stringにしたい
+//                let detastring:String = formatter.string(from: timeNow as Date)
+                
+                //            データの追加
+                QuestionText.append(text)
+//                a.append(detastring)
+                Answers.append(answer)
+                QuestionIMG.append(IMG)
+                
+                print(QuestionText)
+                print(Answers)
+                print(QuestionIMG)
+            }
+        }catch{
+        }
+    }
+    
     
     override func viewDidLoad() {
         startTime = Date().timeIntervalSince1970 - startTime
@@ -90,6 +131,9 @@ class SecondViewController: UIViewController {
     
         super.viewDidLoad()
 
+        read()
+        
+        
         // Do any additional setup after loading the view.
     }
 
