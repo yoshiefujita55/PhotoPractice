@@ -17,7 +17,12 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var CategoryView: UITableView!
     
-    var Category = ["dotbou1","dotbou2","dotbou3"]
+    var QuestionText = [""]
+    var Answers = [""]
+    var QuestionIMG = [""]
+    var Category = [""]
+    var a = [String]()
+    
     
 //    行数を指定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -26,8 +31,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
 //    値を表示
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
         print(indexPath.row)
+       
         cell.textLabel?.text = Category[indexPath.row]
         return cell
     }
@@ -49,6 +55,56 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     }
         }
     }
+    
+    //    削除機能
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+       
+            if editingStyle == .delete {
+                
+                //                    print("削除する文字は\(todoTask)")
+                //                    print("削除する文字は\(todoDeta)")
+                
+                
+                //        AooDelegateを使う用意をしておく
+                let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                //        エンティティを操作するためのオブジェクトを作成
+                let viewContext = appDelegate.persistentContainer.viewContext
+                //        どのエンティティからデータを取得してくるか設定
+                let query:NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
+                do{
+                    
+                    //            削除するデータを取得
+                    let fetchResults = try viewContext.fetch(query)
+                    //            削除するデータを取得
+                    for result : AnyObject in fetchResults {
+                        let deta: NSDate! = result.value(forKey: "timeNow") as! NSDate
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "yyyy/MM/dd hh:mm:ss"
+                        //Stringにしたい
+                        let detastring:String = formatter.string(from: deta as Date)
+                        ///        一行ずつ削除
+                        print(detastring)
+                        print(a)
+                        if detastring == a[indexPath.row]{
+                            
+                            //        一行ずつ削除
+                            let record = result as! NSManagedObject
+                            viewContext.delete(record)
+                        }
+                    }
+                    //            削除した状態を保存(処理の確定)
+                    try viewContext.save()
+                    a.remove(at: indexPath.row)
+                    QuestionText.remove(at: indexPath.row)
+                    Answers.remove(at: indexPath.row)
+                    QuestionIMG.remove(at: indexPath.row)
+                    Category.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.CategoryView.reloadData()
+                }catch{
+                }
+            }
+        }
 
     //    データを取ります。
     func read(){
@@ -62,7 +118,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let query: NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
         
         do{
-            query.sortDescriptors = [NSSortDescriptor(key: "timeNow",ascending: false)]
+            query.sortDescriptors = [NSSortDescriptor(key: "timeNow",ascending: true)]
             //            データを一括取得
             let fetchResults = try viewContext.fetch(query)
             //            データの取得
@@ -71,11 +127,22 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let IMG: String! = result.value(forKey: "questionImage") as! String
                 let answer: String! = result.value(forKey: "questionAnswer") as! String
                 let category:String!  = result.value(forKey: "category") as! String
+                let timeNow:Date!  = result.value(forKey: "timeNow") as! Date
+                print (timeNow)
+                //データ型をString型へ
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy/MM/dd hh:mm:ss"
+                //Stringにしたい
+                let detastring:String = formatter.string(from: timeNow as Date)
                 //            データの追加
                 if Category.index(of: category) != nil{
                     print(Category)
                 }else{
+                    QuestionText.append(text)
+                    Answers.append(answer)
+                    QuestionIMG.append(IMG)
                     Category.append(category)
+                    a.append(detastring)
                 }
             }
         }catch{
@@ -86,7 +153,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         read()
         
         self.CategoryView.reloadData()
+        
     }
+    
     
     
     

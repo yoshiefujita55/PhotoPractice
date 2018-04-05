@@ -6,7 +6,9 @@
 //  Copyright © 2018年 藤田佳恵. All rights reserved.
 //
 
-import UIKit; import CoreData
+import UIKit
+import CoreData
+import Photos
 
 class SecondViewController: UIViewController {
 
@@ -29,22 +31,41 @@ class SecondViewController: UIViewController {
 //    答えが入力された時の動作
     @IBAction func JudgedAnswer(_ sender: UITextField) {
         
-        var AnswerText = Int(Answer.text!)
+        var AnswerText = Answer.text
 
         if QuestionText.index(of: QuestionText[rr]) == Answers.index(of: Answers[rr]){
-            if AnswerText == Int(Answers[rr]){
+            if AnswerText == Answers[rr]{
                Question.text = "Crear"
                 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                     // 0.7秒後に実行したい処理
                     self.Answer.text = ""
+                        
                     var r = Int(arc4random())%self.Answers.count
-                    self.QuestionImage.image = UIImage(named:"\(r).jpg")
-                    self.Question.text = self.QuestionText[r]
-                    self.rr = r
+                        if self.QuestionIMG[r] == "NoImage.jpg"{
+                            self.QuestionImage.image = UIImage(named:"NoImage.jpg")
+                        }else{
+                            if self.QuestionIMG[r] != nil{
+                                let url = URL(string: self.QuestionIMG[r] as String!)
+                                var options:PHImageRequestOptions = PHImageRequestOptions()
+                                options.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
+                                let fetchResult: PHFetchResult = PHAsset.fetchAssets(withALAssetURLs: [url!], options: nil)
+                                let asset: PHAsset = (fetchResult.firstObject! as PHAsset)
+                                let manager: PHImageManager = PHImageManager()
+                                manager.requestImage(for: asset,targetSize: PHImageManagerMaximumSize,contentMode: .aspectFill,options: options) { (image, info) -> Void in
+                                    self.QuestionImage.image = image
+                                }
+                            }
+                        }
+                        self.Question.text = self.QuestionText[r]
+                        self.rr = r
                     }
             }else{
             Question.text = "Not crear"
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8){
+                    self.Question.text = self.QuestionText[self.rr]
+                }
+                
             Answer.text = ""
             }
         }
@@ -72,6 +93,8 @@ class SecondViewController: UIViewController {
     func read(){
         //        カラの配列を用意します。
         QuestionText = []
+        Answers = []
+        QuestionIMG = []
         //        AppDelegateを使う準備
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         //        エンティティを操作するためのオブジェクト
@@ -116,6 +139,9 @@ class SecondViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        
+        read()
+        
         startTime = Date().timeIntervalSince1970 - startTime
         labelTimer.text = takeTime
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updatelabel), userInfo: nil, repeats: true)
@@ -124,14 +150,30 @@ class SecondViewController: UIViewController {
         
         var r = Int(arc4random())%Answers.count
         
-        QuestionImage.image = UIImage(named:"\(r).jpg")
-        Question.text = QuestionText[r]
-        
+        if QuestionIMG[r] == "NoImage.jpg"{
+            QuestionImage.image = UIImage(named:"NoImage.jpg")
+        }else{
+//            QuestionImage.image = UIImage(named:"\(r).jpg")
+            
+            if QuestionIMG[r] != nil{
+                let url = URL(string: QuestionIMG[r] as String!)
+                var options:PHImageRequestOptions = PHImageRequestOptions()
+                options.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
+                let fetchResult: PHFetchResult = PHAsset.fetchAssets(withALAssetURLs: [url!], options: nil)
+                let asset: PHAsset = (fetchResult.firstObject! as PHAsset)
+                let manager: PHImageManager = PHImageManager()
+                manager.requestImage(for: asset,targetSize: PHImageManagerMaximumSize,contentMode: .aspectFill,options: options) { (image, info) -> Void in
+                    self.QuestionImage.image = image
+                }
+            }
+        }
+            Question.text = QuestionText[r]
+            
         rr = r
     
         super.viewDidLoad()
 
-        read()
+        
         
         
         // Do any additional setup after loading the view.

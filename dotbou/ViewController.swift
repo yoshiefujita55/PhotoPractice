@@ -70,7 +70,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let query: NSFetchRequest<Dotbou> = Dotbou.fetchRequest()
         
         do{
-            query.sortDescriptors = [NSSortDescriptor(key: "timeNow",ascending: false)]
+            query.sortDescriptors = [NSSortDescriptor(key: "timeNow",ascending: true)]
             //            データを一括取得
             let fetchResults = try viewContext.fetch(query)
             //            データの取得
@@ -111,7 +111,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "start"{
             var dvc = segue.destination as! SecondViewController
+            if targetMin == nil || targetMin == "" {
+                targetMin = min[0]
+            }
             dvc.takeTime = targetMin
+            
+            if targetCategory == nil || targetCategory == ""{
+                targetCategory = Category[0]
+            }
             dvc.takeCategory = targetCategory
             }
     }
